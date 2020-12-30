@@ -12,11 +12,15 @@ const resolvers = {
       .select("-__v -password");
     },
 
-    // user: async (parent, { _id }) => {
-    //   return User.findOne({ _id })
-    //   .select("-__v -password");
-    // },
+    // get a user by _id
+    userById: async (parent, { _id }) => {
+      return User.findOne({ _id })
+      .select("-__v -password");
+    },
   },
+  Mutation: {
+      
+  }
 };
 
 module.exports = resolvers;
