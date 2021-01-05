@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from "@apollo/react-hooks";
 import { SAVE_BOOK } from '../utils/mutations.js';
+import { useMutation } from "@apollo/react-hooks";
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
@@ -18,6 +18,9 @@ const SearchBooks = () => {
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -54,7 +57,6 @@ const SearchBooks = () => {
     }
   };
 
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
@@ -68,12 +70,10 @@ const SearchBooks = () => {
     }
 
     try {
-      await saveBook();
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
+      console.log("bookToSave:", bookToSave);
+       await saveBook({
+        variables: { input: bookToSave},
+      });
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
@@ -81,30 +81,6 @@ const SearchBooks = () => {
     }
   };
 
-  // const handleSaveBook = async (bookId) => {
-  //   // find the book in `searchedBooks` state by the matching id
-  //   const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await saveBook(bookToSave, token);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     // if book successfully saves to user's account, save book id to state
-  //     setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <>
@@ -161,6 +137,7 @@ const SearchBooks = () => {
                     </Button>
                   )}
                 </Card.Body>
+                {error && <div> Something went wrong...</div>}
               </Card>
             );
           })}
