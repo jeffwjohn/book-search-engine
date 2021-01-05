@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 // set token secret and expiration date
 const secret = "mysecretsshhhhh"; // Not a secure method! Store this in a .env file!
-const expiration = "2h";
+const expiration = "200h";
 
 module.exports = {
   signToken: function ({ username, email, _id }) {
