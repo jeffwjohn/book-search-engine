@@ -52,9 +52,9 @@ const resolvers = {
       return { token, user };
     },
     saveBook: async (parent, args, context) => {
-        console.log("savedBooks:", savedBooks)
+        // console.log("savedBooks:", savedBooks)
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
             { $addToSet: { savedBooks: args.input } },
             { new: true, runValidators: true }
