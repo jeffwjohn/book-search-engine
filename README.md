@@ -4,7 +4,7 @@
 Book Search Engine is an Apollo and React based application that allows users to browse Google Books API and choose books to save and display in their own, unique account pages. 
 
  ## Link to Deployed Application
-* [Book Search Engine](https://nameless-fjord-00851.herokuapp.com)
+* [Book Search Engine](https://radiant-bayou-44976.herokuapp.com/)
 ### User Story
 * AS AN avid reader
 * I WANT to search for new books to read
