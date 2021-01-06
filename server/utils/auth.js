@@ -33,8 +33,6 @@ module.exports = {
     } catch {
       console.log("Invalid token");
     }
-    // We don't want an error thrown on every request, though. Users with an invalid token should still be able to request and see all thoughts. Thus, we wrapped the verify() method in a try...catch statement to mute the error. We'll manually throw an authentication error on the resolver side when the need arises.
-
     // return updated request object
     return req;
   },

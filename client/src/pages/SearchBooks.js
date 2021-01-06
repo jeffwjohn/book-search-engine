@@ -71,7 +71,6 @@ const SearchBooks = () => {
     }
 
     try {
-      console.log("bookToSave:", bookToSave);
        await saveBook({
         variables: { input: bookToSave},
       });
@@ -125,7 +124,7 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
-                  <p className='small'>Link: <a href={book.link} target="_blank" rel="nonreferrer">{book.link}</a></p>
+                  <p className='small'>Link: <a href={book.link} target="_blank" rel="noopener noreferrer">{book.link}</a></p>
                   <Card.Text>{book.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
